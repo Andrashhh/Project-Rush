@@ -12,12 +12,14 @@ namespace Root
         [SerializeField] CameraSpring cameraSpring;
         [SerializeField] CameraLean cameraLean;
         [SerializeField] AbilitySlots playerAbilities;
+        [SerializeField] Interact interact;
 
         InputSys inputActions;
 
         CameraInput cameraInput;
         CharacterInput characterInput;
         AbilityInput abilityInput;
+        InteractInput interactInput;
 
         CharacterState state;
 
@@ -50,10 +52,11 @@ namespace Root
             UpdatePlayerCharacter(characterInput, deltaTime);
             UpdatePlayerCamera(cameraInput, characterInput, state);
             UpdateAbility(abilityInput);
+            UpdateInteract(interactInput);
 
 #if UNITY_EDITOR
             if(Keyboard.current.tKey.wasPressedThisFrame) {
-                var ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+                var ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward * 200f);
                 if(Physics.Raycast(ray, out var hit)) {
                     Teleport(hit.point);
                 }
@@ -73,7 +76,7 @@ namespace Root
 
         void UpdateInputs(InputSys.PlayerActions input) {
             cameraInput = new CameraInput {
-                Look = input.Look.ReadValue<Vector2>()
+                Look = input.Look.ReadValue<Vector2>(),
             };
 
             characterInput = new CharacterInput {
@@ -91,6 +94,15 @@ namespace Root
                 Slot3 = input.Ability3.WasPressedThisFrame(),
                 Slot4 = input.Ability4.WasPressedThisFrame(),
             };
+
+            interactInput = new InteractInput {
+                Interact = input.Interact.WasPressedThisFrame()
+            };
+            
+        }
+
+        void UpdateInteract(InteractInput interactInput) {
+            interact.Cast(interactInput.Interact);
         }
 
         void UpdateAbility(AbilityInput abilityInput) {
