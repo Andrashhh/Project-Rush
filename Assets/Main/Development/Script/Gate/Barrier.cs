@@ -1,38 +1,39 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Root
 {
     public class Barrier : MonoBehaviour, IInteractable
     {
         MeshCollider barrierCollider;
-        public Material material;
+        public Material Material;
 
-        public float fade;
+        public float Fade;
         bool initiateFadeOut;
+
 
         void Awake() {
             barrierCollider = gameObject.GetComponent<MeshCollider>();
-            material = gameObject.GetComponent<MeshRenderer>().material;
+            Material = gameObject.GetComponent<MeshRenderer>().material;
+
         }
 
         void Start() {
-
-            fade = 0f;
+            Fade = 0f;
 
             Close();
         }
 
         void Update() {
-            print("keep runnin runnin");
             FadeOut();
         }
 
         void FadeOut() {
-            if(initiateFadeOut && fade < 1) {
-                fade += Time.deltaTime;
-                material.SetFloat("_FadeValue", fade);
+            if(initiateFadeOut && Fade < 1) {
+                Fade += Time.deltaTime;
+                Material.SetFloat("_FadeValue", Fade);
 
-                if(fade >= 1) {
+                if(Fade >= 1) {
                     gameObject.SetActive(false);
                 }
             }
@@ -45,7 +46,6 @@ namespace Root
 
         public void Open() {
             barrierCollider.enabled = false;
-            //print("oahn");
         }
 
         public void Close() {

@@ -13,6 +13,8 @@ namespace Root
         [SerializeField] CameraLean cameraLean;
         [SerializeField] AbilitySlots playerAbilities;
         [SerializeField] Interact interact;
+        [SerializeField] PlayerSounds playerSounds;
+        [SerializeField] PlayerFootsteps playerFootSteps;
 
         InputSys inputActions;
 
@@ -39,6 +41,7 @@ namespace Root
 
 
             Initialize();
+
         }
 
         void OnDestroy() {
@@ -52,7 +55,8 @@ namespace Root
             UpdatePlayerCharacter(characterInput, deltaTime);
             UpdatePlayerCamera(cameraInput, characterInput, state);
             UpdateAbility(abilityInput);
-            UpdateInteract(interactInput);
+            UpdateInteract(interactInput, playerSounds);
+            UpdatePlayerFootsteps(state, characterInput, playerSounds, deltaTime);
 
 #if UNITY_EDITOR
             if(Keyboard.current.tKey.wasPressedThisFrame) {
@@ -98,11 +102,15 @@ namespace Root
             interactInput = new InteractInput {
                 Interact = input.Interact.WasPressedThisFrame()
             };
-            
         }
 
-        void UpdateInteract(InteractInput interactInput) {
-            interact.Cast(interactInput.Interact);
+        void UpdatePlayerFootsteps(CharacterState state, CharacterInput input, PlayerSounds playerSound, float t) {
+            playerFootSteps.UpdateFootsteps(state, input, playerSound, 1f, t);
+        }
+
+        void UpdateInteract(InteractInput interactInput, PlayerSounds playerSound) {
+            interact.Cast(interactInput.Interact, playerSound);
+            
         }
 
         void UpdateAbility(AbilityInput abilityInput) {

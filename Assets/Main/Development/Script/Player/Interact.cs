@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Root
@@ -15,7 +16,7 @@ namespace Root
         public Transform InteractSource;
         public float InteractRange;
 
-        public void Cast(bool input) {
+        public void Cast(bool input, PlayerSounds playerSounds) {
             if(input) {
                 Ray r = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
                 if(Physics.Raycast(r, out RaycastHit hitInfo, InteractRange)) {
@@ -23,11 +24,14 @@ namespace Root
                         interactObj.OnInteract();
                     }
                     else {
-                        // if it's not the ground than play sound
+                        playerSounds.PlaySound(playerSounds.InteractFailed);
                     }
                 }
-            }
+                else {
+                    playerSounds.PlaySound(playerSounds.InteractFailed);
 
+                }
+            }
         }
     }
 }
