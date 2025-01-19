@@ -339,6 +339,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 933178621}
   - {fileID: 1512242837}
   - {fileID: 1971013373}
   - {fileID: 1007873472}
@@ -453,6 +454,146 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &933178620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 933178621}
+  - component: {fileID: 933178622}
+  m_Layer: 0
+  m_Name: VEGETATION SPAWNER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &933178621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933178620}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 351872503}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &933178622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933178620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f710250abab6f24a954bdf3c3c1ac64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seed: 0
+  terrains:
+  - {fileID: 1512242836}
+  visibleTerrainsOnly: 0
+  treeTypes: []
+  grassPrefabs:
+  - enabled: 1
+    name: Grass_1
+    seed: 5439
+    probability: 25
+    collisionCheck: 1
+    rejectUnderwater: 0
+    heightRange: {x: 0, y: 79.09607}
+    slopeRange: {x: 0, y: 51.864407}
+    curvatureRange: {x: 0, y: 1}
+    layerMasks:
+    - name: Grass
+      layerID: 1
+      threshold: 0
+    instanceCount: 450408
+    index: 0
+    type: 1
+    renderAsBillboard: 0
+    prefab: {fileID: 0}
+    gpuInstancing: 1
+    holeEdgePadding: 1
+    alignToGround: 59.7
+    positionJitter: 0
+    useDensityScaling: 1
+    density: 4.34
+    billboard: {fileID: 2800000, guid: eb04da16cbc16c9488332336fb11b965, type: 3}
+    mainColor: {r: 0.6117647, g: 0.37807512, b: 0.23921567, a: 1}
+    secondaryColor: {r: 1, g: 1, b: 1, a: 1}
+    linkColors: 1
+    minMaxHeight: {x: 0.7627119, y: 1.5423744}
+    minMaxWidth: {x: 0.83728784, y: 2.2711866}
+    noiseSize: 0.1
+  - enabled: 1
+    name: Grass_2
+    seed: 2821
+    probability: 25
+    collisionCheck: 0
+    rejectUnderwater: 0
+    heightRange: {x: 0, y: 79.09607}
+    slopeRange: {x: 0, y: 51.864407}
+    curvatureRange: {x: 0, y: 1}
+    layerMasks:
+    - name: Grass
+      layerID: 1
+      threshold: 0
+    instanceCount: 450989
+    index: 1
+    type: 1
+    renderAsBillboard: 0
+    prefab: {fileID: 0}
+    gpuInstancing: 1
+    holeEdgePadding: 1
+    alignToGround: 59.7
+    positionJitter: 0
+    useDensityScaling: 1
+    density: 4.81
+    billboard: {fileID: 2800000, guid: eb04da16cbc16c9488332336fb11b965, type: 3}
+    mainColor: {r: 0.4339623, g: 0.36810428, b: 0.26815593, a: 1}
+    secondaryColor: {r: 1, g: 1, b: 1, a: 1}
+    linkColors: 1
+    minMaxHeight: {x: 0.7627119, y: 2.0339}
+    minMaxWidth: {x: 0.6508472, y: 2.4915252}
+    noiseSize: 0.1
+  terrainSettings:
+    drawTreesAndFoliage: 1
+    preservePrefabLayer: 1
+    treeLightProbes: 0
+    treeDistance: 1000
+    billboardStart: 300
+    maxMeshTrees: 50
+    detailScattermode: 0
+    grassDistance: 400
+    grassDensity: 1
+    windStrength: 0.15
+    windSpeed: 1
+    windFrequency: 2
+    wintTint: {r: 1, g: 1, b: 1, a: 1}
+  cellSize: 64
+  cellDivisions: 4
+  highPrecisionCollision: 1
+  collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  terrainMinMaxHeight: {x: -10.3752365, y: 281.71414}
+  detailResolution: 2048
+  detailResolutionIndex: 4
+  grassPatchSize: 64
+  grassPatchSizeIndex: 3
+  tempColliders: []
+  waterHeight: 0
+  autoRespawnTrees: 1
 --- !u!1 &1007873470
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,8 +842,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2adeeae575dafd41bc5a2029bb2ac99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Material: {fileID: 0}
-  Fade: 0
+  fadeOutSpeed: 1.25
+  soundLibrary: {fileID: 11400000, guid: cf5bae2909bd2244e9156b851237b11f, type: 2}
 --- !u!64 &1192065121
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1032,11 +1173,11 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 51409b4305aa3634e8521659f216c38b, type: 2}
-  m_TreeDistance: 5000
-  m_TreeBillboardDistance: 50
+  m_TreeDistance: 1000
+  m_TreeBillboardDistance: 300
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
+  m_DetailObjectDistance: 400
   m_DetailObjectDensity: 1
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
@@ -1050,8 +1191,8 @@ Terrain:
   m_IgnoreQualitySettings: 0
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
-  m_BakeLightProbesForTrees: 1
-  m_PreserveTreePrototypeLayers: 0
+  m_BakeLightProbesForTrees: 0
+  m_PreserveTreePrototypeLayers: 1
   m_DeringLightProbesForTrees: 1
   m_ReceiveGI: 1
   m_ScaleInLightmap: 0.0256
@@ -1406,7 +1547,7 @@ GameObject:
   - component: {fileID: 5651025949644029592}
   - component: {fileID: 5371822005689981804}
   - component: {fileID: 4059200553806952117}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: vfx_particle_ClaimSoul
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2234,7 +2375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450653467876849}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShortTroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3632,8 +3773,8 @@ MonoBehaviour:
   PreserveAttachedRigidbodyMomentum: 1
   HasPlanarConstraint: 0
   PlanarConstraintAxis: {x: 0, y: 0, z: 1}
-  MaxMovementIterations: 5
-  MaxDecollisionIterations: 1
+  MaxMovementIterations: 10
+  MaxDecollisionIterations: 2
   CheckMovementInitialOverlaps: 1
   KillVelocityWhenExceedMaxMovementIterations: 1
   KillRemainingMovementWhenExceedMaxMovementIterations: 1
@@ -4288,28 +4429,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &2699092741852166999
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8164078558599921554}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 1
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2432090755550338912, guid: 19cfc7307d1f05b46ac34b7c4b6f4bfd, type: 3}
 --- !u!4 &2709594857202360410
 Transform:
   m_ObjectHideFlags: 0
@@ -14219,9 +14338,10 @@ GameObject:
   - component: {fileID: 1151388028517035177}
   - component: {fileID: 2823090746557928931}
   - component: {fileID: 1587545474022519159}
-  - component: {fileID: 2699092741852166999}
   - component: {fileID: 8164078558599921555}
-  m_Layer: 0
+  - component: {fileID: 8164078558599921557}
+  - component: {fileID: 8164078558599921556}
+  m_Layer: 12
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14240,6 +14360,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9abfd46ec5fb81342bef9224a2aba5a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &8164078558599921556
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8164078558599921554}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.53, y: 4.7, z: 2.48}
+  m_Center: {x: -0.000007761588, y: 7.02, z: -0.6477428}
+--- !u!65 &8164078558599921557
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8164078558599921554}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.6, y: 4.408031, z: 3.52}
+  m_Center: {x: 0.12618612, y: 2.2300217, z: -0.6477457}
 --- !u!4 &8164319443349346830
 Transform:
   m_ObjectHideFlags: 0
@@ -14309,8 +14471,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InteractFailed:
     soundLibrary: {fileID: 11400000, guid: c0f3256be3c628a4ea14c12508e950af, type: 2}
+  InteractSuccesful:
+    soundLibrary: {fileID: 11400000, guid: b53540b7082b8f24b87e49e9a3995dda, type: 2}
   Footsteps:
-    soundLibrary: {fileID: 11400000, guid: b39933043c9339e4698756ca23e3c2a2, type: 2}
+  - soundLibrary: {fileID: 11400000, guid: 4591de62471100149bfdfe7acb80e445, type: 2}
+  - soundLibrary: {fileID: 11400000, guid: 38bb487195d36b4468d8862cef155492, type: 2}
 --- !u!114 &8224493441073296052
 MonoBehaviour:
   m_ObjectHideFlags: 0

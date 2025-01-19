@@ -16,7 +16,7 @@ MonoBehaviour:
   soundData:
     clip: {fileID: 8300000, guid: be248d28ab8ff1d44a7c4c8e5fe33be0, type: 3}
     mixerGroup: {fileID: -1655472622737748322, guid: 36f366fff1c2e374f81d5b476c5e2ea4, type: 2}
-    loop: 1
+    loop: 0
     playOnAwake: 1
     frequentSound: 0
     mute: 0

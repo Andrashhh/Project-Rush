@@ -1,16 +1,19 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Rand = UnityEngine.Random;
 
 namespace Root
 {
     public class PlayerSounds : MonoBehaviour {
-        public Sound InteractFailed = new();
-        public Sound Footsteps = new();
+        public Sound InteractFailed;
+        public Sound InteractSuccesful;
+        public Sound[] Footsteps;
 
         void Awake() {
             LoadSoundBuilderOf(InteractFailed);
-            LoadSoundBuilderOf(Footsteps);
+            LoadSoundBuilderOf(InteractSuccesful);
+            LoadSoundBuilderOf(null, Footsteps);
         }
 
         public void PlaySound(Sound sound) {
@@ -27,8 +30,21 @@ namespace Root
             sound.soundBuilder.WithRandomPitch().Play(sound.soundLibrary.soundData);
         }
 
-        void LoadSoundBuilderOf(Sound sound) {
-            sound.soundBuilder = SoundManager.Instance.CreateSoundBuilder();
+        public void PlayRandomSoundsWithRandomPitch(Sound[] sounds) {
+            var temp = Rand.Range(0, sounds.Length);
+            sounds[temp].soundBuilder.WithRandomPitch().Play(sounds[temp].soundLibrary.soundData);
+        }
+
+        void LoadSoundBuilderOf(Sound sound = null, Sound[] soundArray = null) {
+            if(sound != null) {
+                sound.soundBuilder = SoundManager.Instance.CreateSoundBuilder();
+            }
+
+            if(soundArray != null) {
+                for(int i = 0; i < soundArray.Length; i++) {
+                    soundArray[i].soundBuilder = SoundManager.Instance.CreateSoundBuilder();
+                }
+            }
         }
     }
 

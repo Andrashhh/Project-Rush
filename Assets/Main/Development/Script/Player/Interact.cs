@@ -22,6 +22,7 @@ namespace Root
                 if(Physics.Raycast(r, out RaycastHit hitInfo, InteractRange)) {
                     if(hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj)) {
                         interactObj.OnInteract();
+                        playerSounds.PlaySound(playerSounds.InteractSuccesful);
                     }
                     else {
                         playerSounds.PlaySound(playerSounds.InteractFailed);

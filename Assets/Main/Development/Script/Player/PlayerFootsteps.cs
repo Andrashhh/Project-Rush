@@ -8,28 +8,28 @@ namespace Root
         float tempTime;
 
         public void UpdateFootsteps(CharacterState state, CharacterInput input, PlayerSounds sound, float stepInterval, float time) {
+            var velocity = (state.Velocity.magnitude / 5);
+
             if(state.Stance is not Stance.Stand or Stance.Crouch) {
                 return;
             }
 
-            if(!state.Grounded && !(tempTime > 0.3f)) {
-                return;
-            }
-
-            if(input.Move != null && !(state.Stance == Stance.Slide)) {
-                tempTime += time;
-                if(tempTime > stepInterval / (state.Velocity.magnitude / 8)) {
-                    PlayFootstepSound(sound);
-                    tempTime = 0f;
+            if(state.Grounded && !input.Jump) {
+                if(input.Move != Vector2.zero) {
+                    tempTime += time;
+                    if(tempTime > stepInterval / velocity) {
+                        PlayFootstepSound(sound);
+                        tempTime = 0f;
+                    }
                 }
-            }
-            else {
-                tempTime = 0f;
+                else {
+                    tempTime = 0.35f;
+                }
             }
         }
 
         void PlayFootstepSound(PlayerSounds sound) {
-            sound.PlaySoundWithRandomPitch(sound.Footsteps);
+            sound.PlayRandomSoundsWithRandomPitch(sound.Footsteps);
         }
     }
 }

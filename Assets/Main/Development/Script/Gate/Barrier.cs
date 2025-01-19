@@ -6,20 +6,27 @@ namespace Root
     public class Barrier : MonoBehaviour, IInteractable
     {
         MeshCollider barrierCollider;
-        public Material Material;
+        Material material;
+        AudioSource barrierNoise;
 
-        public float Fade;
+        [SerializeField] float fadeOutSpeed = 1.25f;
+        float fade;
         bool initiateFadeOut;
+
+        [SerializeField] SoundLibrary soundLibrary;
+        SoundBuilder soundBuilder;
 
 
         void Awake() {
             barrierCollider = gameObject.GetComponent<MeshCollider>();
-            Material = gameObject.GetComponent<MeshRenderer>().material;
+            material = gameObject.GetComponent<MeshRenderer>().material;
+            barrierNoise = gameObject.GetComponent<AudioSource>();
 
+            soundBuilder = SoundManager.Instance.CreateSoundBuilder();
         }
 
         void Start() {
-            Fade = 0f;
+            fade = 0f;
 
             Close();
         }
@@ -29,11 +36,12 @@ namespace Root
         }
 
         void FadeOut() {
-            if(initiateFadeOut && Fade < 1) {
-                Fade += Time.deltaTime;
-                Material.SetFloat("_FadeValue", Fade);
+            if(initiateFadeOut && fade < 1) {
+                fade += Time.deltaTime / fadeOutSpeed;
+                material.SetFloat("_FadeValue", fade);
+                barrierNoise.volume -= Time.deltaTime / fadeOutSpeed;
 
-                if(Fade >= 1) {
+                if(fade >= 1) {
                     gameObject.SetActive(false);
                 }
             }
@@ -46,6 +54,7 @@ namespace Root
 
         public void Open() {
             barrierCollider.enabled = false;
+            soundBuilder.WithPosition(transform.position).Play(soundLibrary.soundData);
         }
 
         public void Close() {
