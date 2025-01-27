@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,13 +29,15 @@ namespace Root
         Transform cameraTargetTransform;
         float deltaTime;
 
+        bool gamePaused;
+
         void Initialize() {
             playerCharacter.Initialize();
             playerAbilities.Initialize();
         }
 
         void Start() {
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.lockState = CursorLockMode.Locked;
 
             inputActions = new InputSys();
             inputActions.Enable();
@@ -44,14 +47,24 @@ namespace Root
 
         }
 
+        void OnEnable() {
+            GameManager.OnGameStateChanged += OnGameStateChanged;
+        }
+
         void OnDestroy() {
             inputActions.Dispose();
+            GameManager.OnGameStateChanged -= OnGameStateChanged;
         }
 
         void Update() {
             UpdateVariables();
 
             UpdateInputs(inputActions.Player);
+
+            if(gamePaused) {
+                return;
+            }
+
             UpdatePlayerCharacter(characterInput, deltaTime);
             UpdatePlayerCamera(cameraInput, characterInput, state);
             UpdateAbility(abilityInput);
@@ -102,6 +115,10 @@ namespace Root
             interactInput = new InteractInput {
                 Interact = input.Interact.WasPressedThisFrame()
             };
+
+            if(input.Pause.WasPressedThisFrame()) {
+                SceneManager.Instance.PauseGame();
+            }
         }
 
         void UpdatePlayerFootsteps(CharacterState state, CharacterInput input, PlayerSounds playerSound, float t) {
@@ -136,6 +153,10 @@ namespace Root
             cameraSpring.UpdateSpring(deltaTime, cameraTargetTransform.up);
             cameraLean.UpdateLean(deltaTime, state, state.Acceleration, state.Velocity, cameraTargetTransform.up);
             playerCamera.UpdatePosition(cameraTargetTransform);
+        }
+
+        private void OnGameStateChanged(GameState state) {
+            gamePaused = (state != GameState.PLAYING);
         }
 
         public void Teleport(Vector3 pos) {

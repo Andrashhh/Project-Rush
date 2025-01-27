@@ -19,6 +19,7 @@ namespace Root
         public void Cast(bool input, PlayerSounds playerSounds) {
             if(input) {
                 Ray r = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+                Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward, Color.magenta);
                 if(Physics.Raycast(r, out RaycastHit hitInfo, InteractRange)) {
                     if(hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj)) {
                         interactObj.OnInteract();
