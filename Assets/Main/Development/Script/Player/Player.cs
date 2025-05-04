@@ -61,24 +61,15 @@ namespace Root
 
             UpdateInputs(inputActions.Player);
 
-            if(gamePaused) {
-                return;
-            }
-
             UpdatePlayerCharacter(characterInput, deltaTime);
             UpdatePlayerCamera(cameraInput, characterInput, state);
             UpdateAbility(abilityInput);
             UpdateInteract(interactInput, playerSounds);
             UpdatePlayerFootsteps(state, characterInput, playerSounds, deltaTime);
 
-#if UNITY_EDITOR
             if(Keyboard.current.tKey.wasPressedThisFrame) {
-                var ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward * 200f);
-                if(Physics.Raycast(ray, out var hit)) {
-                    Teleport(hit.point);
-                }
+                Teleport(Crosshair.Point);
             }
-#endif
         }
 
         void LateUpdate() {
@@ -92,6 +83,19 @@ namespace Root
         }
 
         void UpdateInputs(InputSys.PlayerActions input) {
+            if(gamePaused) {
+                cameraInput = new();
+                characterInput = new();
+                abilityInput = new();
+                interactInput = new();
+                return;
+            }
+
+            if(input.Pause.WasPressedThisFrame()) {
+                SceneManager.Instance.PauseGame();
+                return;
+            }
+
             cameraInput = new CameraInput {
                 Look = input.Look.ReadValue<Vector2>(),
             };
@@ -115,10 +119,6 @@ namespace Root
             interactInput = new InteractInput {
                 Interact = input.Interact.WasPressedThisFrame()
             };
-
-            if(input.Pause.WasPressedThisFrame()) {
-                SceneManager.Instance.PauseGame();
-            }
         }
 
         void UpdatePlayerFootsteps(CharacterState state, CharacterInput input, PlayerSounds playerSound, float t) {
@@ -131,10 +131,10 @@ namespace Root
         }
 
         void UpdateAbility(AbilityInput abilityInput) {
-            playerAbilities.UpdateMaxCD(Slot.First, 10f);
+            playerAbilities.UpdateMaxCD(Slot.First, 4f);
             playerAbilities.UpdateMaxCD(Slot.Second, 4f);
-            playerAbilities.UpdateMaxCD(Slot.Third, 30f);
-            playerAbilities.UpdateMaxCD(Slot.Fourth, 120f);
+            playerAbilities.UpdateMaxCD(Slot.Third, 2f);
+            playerAbilities.UpdateMaxCD(Slot.Fourth, 4f);
 
             playerAbilities.UpdateSlots(abilityInput);
         }

@@ -10,16 +10,28 @@ namespace Root
         MENU,
     }
 
+    public enum SoulLevels {
+        Level0 = 0,
+        Level1 = 1,
+        Level2 = 2,
+    }
+
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
 
         [NonSerialized] public GameState State;
+        [NonSerialized] public SoulLevels SoulLevels;
 
         public static Action<GameState> OnGameStateChanged;
 
+        
+
         void Awake() {
             GetInstance();
+
+            SoulLevels = SoulLevels.Level0;
+
         }
 
         void Start() {

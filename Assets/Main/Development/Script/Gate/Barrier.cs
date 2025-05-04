@@ -16,6 +16,7 @@ namespace Root
         [SerializeField] SoundLibrary soundLibrary;
         SoundBuilder soundBuilder;
 
+        public int GateLevel;
 
         void Awake() {
             barrierCollider = gameObject.GetComponent<MeshCollider>();
@@ -47,14 +48,22 @@ namespace Root
             }
         }
 
+        bool IsConditionSoulClaimed(int unlockLevel) {
+            Debug.Log(unlockLevel);
+            Debug.Log((int)GameManager.Instance.SoulLevels);
+            return unlockLevel >= (int)GameManager.Instance.SoulLevels;
+        }
+
         public void OnInteract() {
-            initiateFadeOut = true;
             Open();
         }
 
         public void Open() {
-            barrierCollider.enabled = false;
-            soundBuilder.WithPosition(transform.position).Play(soundLibrary.soundData);
+            if((int)GameManager.Instance.SoulLevels >= GateLevel) {
+                initiateFadeOut = true;
+                barrierCollider.enabled = false;
+                soundBuilder.WithPosition(transform.position).Play(soundLibrary.soundData);
+            }
         }
 
         public void Close() {

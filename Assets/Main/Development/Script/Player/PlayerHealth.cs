@@ -17,7 +17,7 @@ namespace Root
         }
 
         void Start() {
-            InitialSet(80, 100);
+            InitialSet(100, 100);
         }
 
         public void InitialSet(int initialHealth, int initialMaxHealth) {
@@ -30,6 +30,10 @@ namespace Root
             health.ChangeHealth(amount);
 
             OnPlayerHealthChanged?.Invoke(this, health.OldHealth, health.CurrentHealth);
+
+            if(health.CurrentHealth <= 0) {
+                GameManager.Instance.UpdateGameState(GameState.DEATH);
+            }
         }
     }
 }
